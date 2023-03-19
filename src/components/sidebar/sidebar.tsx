@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import Profile from '../profile/profile';
+import CreateTaskForm from '../createTaskForm/createTaskForm';
 
 const Sidebar = () => {
   return (
@@ -19,7 +20,8 @@ const Sidebar = () => {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-      <Profile />
+      <Profile name="Mohammad" />
+      <CreateTaskForm />
     </Grid>
   );
 };
