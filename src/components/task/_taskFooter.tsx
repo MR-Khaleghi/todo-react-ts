@@ -8,12 +8,16 @@ import {
   Button,
 } from '@mui/material';
 import { ITaskFooter } from '../taskCounter/interfaces/ITaskFooter';
+import { Status } from '../createTaskForm/enums/Status';
 
 const TaskFooter: FC<ITaskFooter> = (props) => {
   const {
+    id,
+    status,
     onClick = (e) => console.log(e),
     onStatusChange = (e) => console.log(e),
   } = props;
+  console.log(status);
   return (
     <Box
       display="flex"
@@ -22,7 +26,13 @@ const TaskFooter: FC<ITaskFooter> = (props) => {
       mt={4}>
       <FormControlLabel
         label="in Progress"
-        control={<Switch onChange={onStatusChange} color="warning" />}
+        control={
+          <Switch
+            onChange={(e) => onStatusChange(e, id)}
+            color="warning"
+            checked={status === Status.inProgress || false}
+          />
+        }
       />
 
       <Button
@@ -30,7 +40,7 @@ const TaskFooter: FC<ITaskFooter> = (props) => {
         color="success"
         size="small"
         sx={{ color: '#ffffff' }}
-        onClick={onClick}>
+        onClick={(e) => onClick(e, id)}>
         Mark Complete
       </Button>
     </Box>
@@ -40,6 +50,8 @@ const TaskFooter: FC<ITaskFooter> = (props) => {
 TaskFooter.propTypes = {
   onClick: PropTypes.func,
   onStatusChange: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  status: PropTypes.string,
 };
 
 export default TaskFooter;
